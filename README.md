@@ -3,13 +3,13 @@ Dépot git pour le cours d'outils de traitement de corpus du M1 Plurital 2023/24
 
 ## Séance 1 :
 
-__Tâche que je souhaite réaliser__ :
+#### __Tâche que je souhaite réaliser__ :
 
 Je souhaite m'interessée à la tâche appelée dans le TAL Question/Answering ou Question/Réponse en français. Cette tâche consiste à partir d'un corpus, à ce que l'on pose des questions par exemple déterminées par un groupe de spécialistes humains et le programme va apprendre et reprérer les informations du corpus afin de répondre et ressortir un passage du corpus qui contient la réponse à la question.
 
 _ Chercher les données Wikipédia sur lesquelles je souhaite travailler._
 
-__Corpus qui répondrait à cette tâche__ :
+#### __Corpus qui répondrait à cette tâche__ :
 
 - Corpus SQuAD
 
@@ -35,17 +35,17 @@ Un autre exemple de corpus pour répondre à cette tâche serait le corpus MS MA
 
 (https://hal.science/hal-02377119 : lien intéressant, donnant des indication sur le question/answering)
 
-__A quel type de prédiction peut servir ce corpus__ :
+#### __A quel type de prédiction peut servir ce corpus__ :
 
 Ce corpus permet par exemple de produire des chatbots, un module de questions/réponses. Celà permet aussi de retrouver plus rapidement une information.
 
-__A quel modèle il a servi :__
+#### __A quel modèle il a servi :__
 
 Ce corpus a été utilisé dans de nombreux modèle de par sa popularité. Nous pouvons cité les modèles comme __Dynamic-TinyBERT__ (https://huggingface.co/Intel/dynamic_tinybert), __DistilBERT__ base cased distilled SQuAD (https://huggingface.co/distilbert/distilbert-base-cased-distilled-squad) pour des tâches de Q/A. Ce deux derniers modèles sont combinés au transfomers BERT.
 
 Il y a encore __T5__ (https://huggingface.co/valhalla/t5-base-e2e-qg) pour une tâche de Text2Text Generation. La tâche de text2text generation consiste à générer un texte à partir d'un autre texte de départ. C'est une tâche qui permet de faire par exemple un résumé d'un texte ou la traduction de ce dernier dans une autre langue.
 
-__D'autres choses concernant ce corpus :__
+#### __D'autres choses concernant ce corpus :__
 
 Voici comment est constitué le corpus :
 
@@ -59,3 +59,26 @@ Voici l'exemple de la structure d'une donnée présenté dans sur la page huggin
 `{"answers": {"answer_start": [1],"text": ["This is a test text"]},"context": "This is a test context.","id": "1","question": "Is this a test?","title": "train test"}`
 
 __Remarque__ : Il existe une verison plus récente de ce même corpus nommée SQuAD2.0, cette version n'est pas forcément meilleure que la précédente. Ce qui change est la plage de donnée Wikipédia. De plus, cette version 2.0 contient sur l'ensemble de ses questions des questions qui n'ont pas de réponse possible. C'est une différence majeure par rapport à la première version du corpus.
+
+
+## Séance 2 :
+
+L'objectif de cette séance est de programmer un scrapper. Ce dernier viendrait à partir d'une première url, récupérer toutes les informations que l'on souhaite sur tous les autres liens de la page.
+
+Dans le cas du corpus de référence SQuAD choisi, nous devions donc récupérer toutes les introductions Wikipédia des liens de la première page. Le plus important étant la manipulation des données, la page sur laquelle le scrapper se lance est la suivante : https://fr.wikipedia.org/wiki/Chat .
+
+Nous sommes donc lancés sur une tâche de Q/A sur le thème général des chats.
+
+Le programme utilise les librairies requests (qui permet de récupérer le contenu d'un site) et lxml (qui récupère le contenu textuel du site).
+
+Voici le déroulement du programme de scrapping, `scripts/process/scrapper.py` :
+
+1. il visite le lien https://fr.wikipedia.org/wiki/Chat
+2. il récupère tous les liens de cette page, qui sont situés dans des balises `a`, avec attribut `href` (avec la fonction `get_urls()`)
+3. il parcourt toutes ces urls dans la fonction `save_all_urls_contents()`, et pour chacune d'entre elles, il récupère le contenu textuel de l'intro (avec la fonction `get_first_header_text()`), et enregistre ce contenu dans un fichier texte (avec la fonction `save_txt()`).
+
+Nous avons limité le scrapping à 50 liens car dans le cadre de ce projet le plus important n'est pas le nombre de nos données mais la manière dont on va les manipuler.
+De plus, 50 liens n'étant pas énorme, les données ont donc été mises sur ce dépôt git dans le dossier `data/clean/` .
+Les données textuelles sont déjà assez propres et ne nécessitent pas de nettoyage, elles ont donc été directement placées dans le sous-dossier `data/clean/`.
+
+Vous trouverez aussi un dossier `tests/` qui contient quatres programmes pythons ayant servis à la prise en main des différentes librairies pour scrapper le web.
