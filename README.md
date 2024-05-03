@@ -63,6 +63,7 @@ __Remarque__ : Il existe une verison plus récente de ce même corpus nommée SQ
 
 ## Séance 2 :
 
+### Création du scrapper : 
 L'objectif de cette séance est de programmer un scrapper. Ce dernier viendrait à partir d'une première url, récupérer toutes les informations que l'on souhaite sur tous les autres liens de la page.
 
 Dans le cas du corpus de référence SQuAD choisi, nous devions donc récupérer toutes les introductions Wikipédia des liens de la première page. Le plus important étant la manipulation des données, la page sur laquelle le scrapper se lance est la suivante : https://fr.wikipedia.org/wiki/Chat .
@@ -78,7 +79,19 @@ Voici le déroulement du programme de scrapping, `scripts/process/scrapper.py` :
 3. il parcourt toutes ces urls dans la fonction `save_all_urls_contents()`, et pour chacune d'entre elles, il récupère le contenu textuel de l'intro (avec la fonction `get_first_header_text()`), et enregistre ce contenu dans un fichier texte (avec la fonction `save_txt()`).
 
 Nous avons limité le scrapping à 50 liens car dans le cadre de ce projet le plus important n'est pas le nombre de nos données mais la manière dont on va les manipuler.
-De plus, 50 liens n'étant pas énorme, les données ont donc été mises sur ce dépôt git dans le dossier `data/clean/` .
-Les données textuelles sont déjà assez propres et ne nécessitent pas de nettoyage, elles ont donc été directement placées dans le sous-dossier `data/clean/`.
+De plus, 50 liens n'étant pas énorme, les données ont donc été mises sur ce dépôt git dans le dossier `data/raw/` .
+Les données textuelles sont déjà assez propres et ne nécessitent pas de nettoyage, elles ont donc été directement placées dans le sous-dossier `data/raw/`.
 
 Vous trouverez aussi un dossier `tests/` qui contient quatres programmes pythons ayant servis à la prise en main des différentes librairies pour scrapper le web.
+
+
+### Création du csv : 
+
+Afin de coller le plus possible à notre corpus de référence, nous avons besoin d'ordonner nos données dans un fichier au format sérialisé. Dans notre cas, le corpus SQuAD est sérialisé sous un format tabulaire. Nous avons donc décider d'avoir nos données sous format **CSV**. 
+Le script servant à cet effet est `script/process/to_csv.py`. Voici son fonctionnement : 
+
+1. il parcourt tous les documents ressortant de l'aspiration du programme précédement présenté ;
+2. il extrait les informations de ces documents (titre, contenu, ID), qu'il stocke dans un dictionnaire (nous avons donc une liste de dictionnaires) ;
+3. il écrit dans un fichier de type csv les informations contenues dans les dictionnaires.
+
+
