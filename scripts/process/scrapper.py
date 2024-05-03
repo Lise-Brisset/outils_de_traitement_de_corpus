@@ -79,7 +79,7 @@ def save_all_urls_contents(urls_dico):
             # on peut rencontrer des contenus vides (page pas non remplie comme celle de https://fr.wikipedia.org/wiki/Mathou
             if content is not None:
                 # on enregistre sous format txt le contenu de l'url
-                save_txt(content, f"{compte}_{url[1]}")
+                save_txt(content, f"{url[1]}.txt")
                 compte += 1
             else:
                 pass
