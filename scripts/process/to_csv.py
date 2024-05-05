@@ -1,3 +1,15 @@
+"""
+Ce programme parcourt le dossier data/raw/ avec les contenus aspirés et cherche les informations suivantes
+pour chaque document :
+- le titre
+- le contenu textuel
+- génère un id pour chaque document.
+
+Ces informations sont sauvegardées dans un fichier csv de sortie appelé sortie.csv (dans data/clean/).
+Afin de coller le plus possible au corpus de référence SQuAD, nous avons ajouté les colonnes "question" et "answer".
+Ces deux dernières colonnes sont actuellement vides en attendant d'obtenir les informations qui les rempliront.
+"""
+
 import csv
 import os
 
@@ -45,7 +57,7 @@ for fichier in liste_fichiers:
 noms_colonnes = ['id', 'title', 'content', 'question', 'answer']
 
 # enregistrement des données sous format tabulaire.
-with (open('../../data/clean/sortie2.csv',  'w', encoding='UTF8', newline='') as out_file):
+with (open('../../data/clean/sortie.csv',  'w', encoding='UTF8', newline='') as out_file):
     writer = csv.DictWriter(out_file, fieldnames=noms_colonnes)
     # on écrit les noms des colonnes du tableaux :
     writer.writeheader()
