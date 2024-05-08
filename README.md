@@ -110,3 +110,27 @@ Grâce à ce programme nous pouvons voir que notre corpus est de la même forme 
 Le corpus est donc prêt pour les étapes suivantes du projet.
 
 
+## Séance 4 : 
+
+### Choix des métriques :
+
+Notre corpus est un corpus constitué pour une tâche de question/answering. Nos métriques vont donc être tournées vers le texte, la taille des contenus de nos colonnes par exemple. 
+Comme les réponses sont issues des contenus des articles Wikipédia, la première métrique pourrait être la taille du contenu par rapport à la taille de la réponse. Normalement la réponse ne doit pas être plus longue que le contenu. Autrement celà signifie qu'il y a une erreur dans la ligne du tableau.
+Nous avons appliqué l'analyseur syntaxique _spacy_ à notre corpus.
+
+### Visualisation des données avec des graphiques : 
+
+Afin d'obtenir des graphiques de la répartition des tailles des contenus et des réponses, nous utilisons la librairie _matplotlib_. 
+Nous obtenons donc le graphique de la répartition de la taille des contenus et de la taille des réponses. Nous avons aussi le graphique de la lois de Zipf sur ces deux derniers. 
+Nous parlons ici du programme `notebooks/visualise_data.ipynb`. 
+Il applique ces graphiques sur les données du corpus de référence SQuAD, puis sur notre corpus. L'analyse morphosyntaxique a été adaptée en fonction de la langue des deux corpus qui est diffirentes. En changeant le module de _spacy_ utilisé, l'un anglais et l'autre français.
+
+Nous avons rencontré des difficultées concernant la récupération de la taille des réponses car la colonne _answer_ contient normalement un dictionnaire, mais _pandas_ reconnait cet élément comme une chaine de caractères. Même en utilisant la librairie _json_, nous n'avons pas réussi à convertir correctement cette chaine de caractères en dictionnaire sans rencontrer d'erreur.
+La taille des réponses a donc été calculée sur la longueur de la chaine complète plutôt que la réponse en elle-même. 
+Voici un exemple de ce qui de ce qui se trouve dans la colonne _answer_ et de ce qu'on souhaite normalement prendre : 
+
+- `{'text': 'la sympathie', 'answer_start': 124}` : contenu de la colonne.
+- `la sympathie` : réponse qu'on souhaite prendre en compte.
+
+La taille indiquée est donc approximative car elle sera plus grande que ce qu'elle devrait être mais elle permet tout de même d'avoir une représentation de la répartition et de l'ordre de grandeur de la taille des réponses.
+
