@@ -95,3 +95,18 @@ Le script servant à cet effet est `script/process/to_csv.py`. Voici son fonctio
 3. il écrit dans un fichier de type csv les informations contenues dans les dictionnaires.
 
 
+## Séance 3 : 
+
+### Ajout des colonnes manquantes :
+
+A l'aide du programme `script/process/add_Q_A_to_csv.py`, nous avons pu ajouter les colonnes de questions et de réponses manquantes à notre corpus sérialisé. Ces données n'étaient pas encore collectées. Nous avons du les générer manuellement tout comme celà avait été fait pour le corpus de référence. Ces questions/réponses sont présentes dans le csv `data/clean/Q_A_chats.csv`. Afin d'avoir un corpus identique dans sa forme et ses colonnes par rapport à SQuAD, le programme `add_Q_A_to_csv.py` vient calculer l'emplacement de la partie du contexte prise pour la réponse. Bien que la création des questions et la selection des réponses ait été manuelle, l'ID du début de la réponse dans "answer_start" a été récupéré automatiquement car il s'agissait d'une technique trop laborieuse.
+Le csv final de sortie de ce programme est : `data/clean/datas_chat.csv`.
+
+### Exploration du corpus avec _csv_, _pandas_ et _datasets_ : 
+
+Afin d'observer le contenu de nos colonnes et de notre csv en général, nous avons le notebook `notebooks/open_data.ipynb`. 
+Ce dernier ouvre notre csv et permet d'afficher par exemple le contenu d'une ligne du tableau grace aux librairies _csv_ et _pandas_. Ce programme nous sert à comparer le format de nos données avec celui de notre corpus de référence qui se trouve sur HuggingFace. Nous pouvons importer et ouvrir le corpus SQuAD grâce à la librairie _datasets_ qui a accès à chaque corpus déposé sur le site. 
+Grâce à ce programme nous pouvons voir que notre corpus est de la même forme que le corpus de référence. Il contient les mêmes colonnes avec le mêmes types de données. 
+Le corpus est donc prêt pour les étapes suivantes du projet.
+
+
