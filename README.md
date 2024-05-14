@@ -134,3 +134,14 @@ Voici un exemple de ce qui de ce qui se trouve dans la colonne _answer_ et de ce
 
 La taille indiquée est donc approximative car elle sera plus grande que ce qu'elle devrait être mais elle permet tout de même d'avoir une représentation de la répartition et de l'ordre de grandeur de la taille des réponses.
 
+
+## Séance 5 : 
+
+### Calcul de la corrélation et test de significativité : 
+
+Nous avons appliqué les calculs de corrélation et le test de significativité à la relation entre les métriques de longueurs des contextes et celles des réponses de notre corpus.
+Les résultats obtenus montrent qu'il n'y pas de corrélation entre ces valeurs car ils sont proches de 0. 
+De plus, les résultats obtenus ne sont pas du tout significatifs car les p-values sont toutes supérieures à 0,05.
+Tous les résultats sont accessibles sur le notebook `notebooks/significativity_test.ipynb`. Vous y trouverez aussi un graphique de la longueur des contextes en fonction de la longueur des réponses. Vous y trouverez aussi une démonstration de la loi binomiale avec l'exemple de la probabilité de tomber sur pile ou face lors d'un lancer de pièces.
+
+### Nettoyage du corpus : 
