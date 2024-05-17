@@ -145,3 +145,7 @@ De plus, les résultats obtenus ne sont pas du tout significatifs car les p-valu
 Tous les résultats sont accessibles sur le notebook `notebooks/significativity_test.ipynb`. Vous y trouverez aussi un graphique de la longueur des contextes en fonction de la longueur des réponses. Vous y trouverez aussi une démonstration de la loi binomiale avec l'exemple de la probabilité de tomber sur pile ou face lors d'un lancer de pièces.
 
 ### Nettoyage du corpus : 
+
+Le corpus a été nettoyé, en supprimant les données aberrantes et les doublons en fonction de la tailles des contextes de notre corpus.
+Il n'y avait aucun doublon dans notre corpus.
+Le programme est un notebook dans `notebooks/clean_data.ipynb`.
