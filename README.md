@@ -149,3 +149,5 @@ Tous les résultats sont accessibles sur le notebook `notebooks/significativity_
 Le corpus a été nettoyé, en supprimant les données aberrantes et les doublons en fonction de la tailles des contextes de notre corpus.
 Il n'y avait aucun doublon dans notre corpus.
 Le programme est un notebook dans `notebooks/clean_data.ipynb`.
+
+Le corpus nettoyé est dans `data/clean/clean_datas_chat.csv`.
