@@ -196,3 +196,14 @@ La fonction permettant la répartition est _`train_test_split()`_.
 
 Afin de répartir en trois parties et non deux, nous avons appliqué deux fois cette dernière fonction. La première ayant servi à séparer la partie test du reste. Et la seconde ayant servi à répartir le reste dans les parties train et dev.
 Nous avons réparti les données de manière aléatoire pour de meilleurs résultats et une répartition homogène des données entre les trois parties.
+
+### Création de la carte de dataset :
+
+Nous avons écrit la carte de dataset qui est le fichier `README.md` de ce dépôt github. Elle contient les métadonnées en format YAML et une description du dataset nommé _TALQuAD_ rédigé en format markdown.
+
+### Application de linters à nos codes : 
+
+Afin d'avoir l'ensemble de nos notebooks et scripts pythons correctement rédigés et propres, nous avons appliqué les formateurs de code python black et isort.
+
+- __black__ : https://pypi.org/project/black/
+- __isort__ : https://pycqa.github.io/isort/
