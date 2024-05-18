@@ -184,3 +184,15 @@ Ces métriques d'évaluations ont été détaillées dans le notebook.
 
 Le calcul ROUGE n'a pas été fait dans le code mais vous pourrez trouver celui du WER. Nous avons produit la focntion calcul_wer() qui calcule le WER entre une référence et une prédiction. 
 Comme nous n'avons pas lancé de modèle sur nos données, nous avons tout de même produit le code qui permettrait de comparer les références avec les prédictions.
+
+## Séance 6 : 
+
+### Split du corpus en train, test et dev : 
+
+notebook : `notebooks/split_corpus.ipynb`
+
+Afin de répartir notre corpus en trois parties qui sont le train, le test et le dev, nous avons utilisé la librairie __scikit-learn__. 
+La fonction permettant la répartition est _`train_test_split()`_.
+
+Afin de répartir en trois parties et non deux, nous avons appliqué deux fois cette dernière fonction. La première ayant servi à séparer la partie test du reste. Et la seconde ayant servi à répartir le reste dans les parties train et dev.
+Nous avons réparti les données de manière aléatoire pour de meilleurs résultats et une répartition homogène des données entre les trois parties.
