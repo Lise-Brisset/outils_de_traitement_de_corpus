@@ -11,14 +11,14 @@ _ Chercher les données Wikipédia sur lesquelles je souhaite travailler._
 
 #### __Corpus qui répondrait à cette tâche__ :
 
-- Corpus SQuAD
+- Corpus SQuaD
 
 Liens vers le corpus :
 
-- https://paperswithcode.com/dataset/squad _( à appronfondir )_
-- https://huggingface.co/datasets/rajpurkar/squad
+- https://paperswithcode.com/dataset/SQuaD _( à appronfondir )_
+- https://huggingface.co/datasets/rajpurkar/SQuaD
 
-Le corpus qui pourrait répondre à cette tâche serait par exemple le corpus SQuAD diminutif de Stanford Question Answering Dataset. Il s'agit d'un corpus connu et beaucoup utilisé pour répondre à cette tâche.
+Le corpus qui pourrait répondre à cette tâche serait par exemple le corpus SQuaD diminutif de Stanford Question Answering Dataset. Il s'agit d'un corpus connu et beaucoup utilisé pour répondre à cette tâche.
 
 Voici les caractéristiques de ce corpus :
 
@@ -41,7 +41,7 @@ Ce corpus permet par exemple de produire des chatbots, un module de questions/r�
 
 #### __A quel modèle il a servi :__
 
-Ce corpus a été utilisé dans de nombreux modèle de par sa popularité. Nous pouvons cité les modèles comme __Dynamic-TinyBERT__ (https://huggingface.co/Intel/dynamic_tinybert), __DistilBERT__ base cased distilled SQuAD (https://huggingface.co/distilbert/distilbert-base-cased-distilled-squad) pour des tâches de Q/A. Ce deux derniers modèles sont combinés au transfomers BERT.
+Ce corpus a été utilisé dans de nombreux modèle de par sa popularité. Nous pouvons cité les modèles comme __Dynamic-TinyBERT__ (https://huggingface.co/Intel/dynamic_tinybert), __DistilBERT__ base cased distilled SQuaD (https://huggingface.co/distilbert/distilbert-base-cased-distilled-SQuaD) pour des tâches de Q/A. Ce deux derniers modèles sont combinés au transfomers BERT.
 
 Il y a encore __T5__ (https://huggingface.co/valhalla/t5-base-e2e-qg) pour une tâche de Text2Text Generation. La tâche de text2text generation consiste à générer un texte à partir d'un autre texte de départ. C'est une tâche qui permet de faire par exemple un résumé d'un texte ou la traduction de ce dernier dans une autre langue.
 
@@ -58,7 +58,7 @@ Voici comment est constitué le corpus :
 Voici l'exemple de la structure d'une donnée présenté dans sur la page huggingFace du modèle :
 `{"answers": {"answer_start": [1],"text": ["This is a test text"]},"context": "This is a test context.","id": "1","question": "Is this a test?","title": "train test"}`
 
-__Remarque__ : Il existe une verison plus récente de ce même corpus nommée SQuAD2.0, cette version n'est pas forcément meilleure que la précédente. Ce qui change est la plage de donnée Wikipédia. De plus, cette version 2.0 contient sur l'ensemble de ses questions des questions qui n'ont pas de réponse possible. C'est une différence majeure par rapport à la première version du corpus.
+__Remarque__ : Il existe une verison plus récente de ce même corpus nommée SQuaD2.0, cette version n'est pas forcément meilleure que la précédente. Ce qui change est la plage de donnée Wikipédia. De plus, cette version 2.0 contient sur l'ensemble de ses questions des questions qui n'ont pas de réponse possible. C'est une différence majeure par rapport à la première version du corpus.
 
 
 ## Séance 2 :
@@ -66,7 +66,7 @@ __Remarque__ : Il existe une verison plus récente de ce même corpus nommée SQ
 ### Création du scrapper : 
 L'objectif de cette séance est de programmer un scrapper. Ce dernier viendrait à partir d'une première url, récupérer toutes les informations que l'on souhaite sur tous les autres liens de la page.
 
-Dans le cas du corpus de référence SQuAD choisi, nous devions donc récupérer toutes les introductions Wikipédia des liens de la première page. Le plus important étant la manipulation des données, la page sur laquelle le scrapper se lance est la suivante : https://fr.wikipedia.org/wiki/Chat .
+Dans le cas du corpus de référence SQuaD choisi, nous devions donc récupérer toutes les introductions Wikipédia des liens de la première page. Le plus important étant la manipulation des données, la page sur laquelle le scrapper se lance est la suivante : https://fr.wikipedia.org/wiki/Chat .
 
 Nous sommes donc lancés sur une tâche de Q/A sur le thème général des chats.
 
@@ -87,7 +87,7 @@ Vous trouverez aussi un dossier `tests/` qui contient quatres programmes pythons
 
 ### Création du csv : 
 
-Afin de coller le plus possible à notre corpus de référence, nous avons besoin d'ordonner nos données dans un fichier au format sérialisé. Dans notre cas, le corpus SQuAD est sérialisé sous un format tabulaire. Nous avons donc décider d'avoir nos données sous format **CSV**. 
+Afin de coller le plus possible à notre corpus de référence, nous avons besoin d'ordonner nos données dans un fichier au format sérialisé. Dans notre cas, le corpus SQuaD est sérialisé sous un format tabulaire. Nous avons donc décider d'avoir nos données sous format **CSV**. 
 Le script servant à cet effet est `script/process/to_csv.py`. Voici son fonctionnement : 
 
 1. il parcourt tous les documents ressortant de l'aspiration du programme précédement présenté ;
@@ -99,13 +99,13 @@ Le script servant à cet effet est `script/process/to_csv.py`. Voici son fonctio
 
 ### Ajout des colonnes manquantes :
 
-A l'aide du programme `script/process/add_Q_A_to_csv.py`, nous avons pu ajouter les colonnes de questions et de réponses manquantes à notre corpus sérialisé. Ces données n'étaient pas encore collectées. Nous avons du les générer manuellement tout comme celà avait été fait pour le corpus de référence. Ces questions/réponses sont présentes dans le csv `data/clean/Q_A_chats.csv`. Afin d'avoir un corpus identique dans sa forme et ses colonnes par rapport à SQuAD, le programme `add_Q_A_to_csv.py` vient calculer l'emplacement de la partie du contexte prise pour la réponse. Bien que la création des questions et la selection des réponses ait été manuelle, l'ID du début de la réponse dans "answer_start" a été récupéré automatiquement car il s'agissait d'une technique trop laborieuse.
+A l'aide du programme `script/process/add_Q_A_to_csv.py`, nous avons pu ajouter les colonnes de questions et de réponses manquantes à notre corpus sérialisé. Ces données n'étaient pas encore collectées. Nous avons du les générer manuellement tout comme celà avait été fait pour le corpus de référence. Ces questions/réponses sont présentes dans le csv `data/clean/Q_A_chats.csv`. Afin d'avoir un corpus identique dans sa forme et ses colonnes par rapport à SQuaD, le programme `add_Q_A_to_csv.py` vient calculer l'emplacement de la partie du contexte prise pour la réponse. Bien que la création des questions et la selection des réponses ait été manuelle, l'ID du début de la réponse dans "answer_start" a été récupéré automatiquement car il s'agissait d'une technique trop laborieuse.
 Le csv final de sortie de ce programme est : `data/clean/datas_chat.csv`.
 
 ### Exploration du corpus avec _csv_, _pandas_ et _datasets_ : 
 
 Afin d'observer le contenu de nos colonnes et de notre csv en général, nous avons le notebook `notebooks/open_data.ipynb`. 
-Ce dernier ouvre notre csv et permet d'afficher par exemple le contenu d'une ligne du tableau grace aux librairies _csv_ et _pandas_. Ce programme nous sert à comparer le format de nos données avec celui de notre corpus de référence qui se trouve sur HuggingFace. Nous pouvons importer et ouvrir le corpus SQuAD grâce à la librairie _datasets_ qui a accès à chaque corpus déposé sur le site. 
+Ce dernier ouvre notre csv et permet d'afficher par exemple le contenu d'une ligne du tableau grace aux librairies _csv_ et _pandas_. Ce programme nous sert à comparer le format de nos données avec celui de notre corpus de référence qui se trouve sur HuggingFace. Nous pouvons importer et ouvrir le corpus SQuaD grâce à la librairie _datasets_ qui a accès à chaque corpus déposé sur le site. 
 Grâce à ce programme nous pouvons voir que notre corpus est de la même forme que le corpus de référence. Il contient les mêmes colonnes avec le mêmes types de données. 
 Le corpus est donc prêt pour les étapes suivantes du projet.
 
@@ -123,7 +123,7 @@ Nous avons appliqué l'analyseur syntaxique _spacy_ à notre corpus.
 Afin d'obtenir des graphiques de la répartition des tailles des contenus et des réponses, nous utilisons la librairie _matplotlib_. 
 Nous obtenons donc le graphique de la répartition de la taille des contenus et de la taille des réponses. Nous avons aussi le graphique de la lois de Zipf sur ces deux derniers. 
 Nous parlons ici du programme `notebooks/visualise_data.ipynb`. 
-Il applique ces graphiques sur les données du corpus de référence SQuAD, puis sur notre corpus. L'analyse morphosyntaxique a été adaptée en fonction de la langue des deux corpus qui est diffirentes. En changeant le module de _spacy_ utilisé, l'un anglais et l'autre français.
+Il applique ces graphiques sur les données du corpus de référence SQuaD, puis sur notre corpus. L'analyse morphosyntaxique a été adaptée en fonction de la langue des deux corpus qui est diffirentes. En changeant le module de _spacy_ utilisé, l'un anglais et l'autre français.
 
 Nous avons rencontré des difficultées concernant la récupération de la taille des réponses car la colonne _answer_ contient normalement un dictionnaire, mais _pandas_ reconnait cet élément comme une chaine de caractères. Même en utilisant la librairie _json_, nous n'avons pas réussi à convertir correctement cette chaine de caractères en dictionnaire sans rencontrer d'erreur.
 La taille des réponses a donc été calculée sur la longueur de la chaine complète plutôt que la réponse en elle-même. 
@@ -151,3 +151,36 @@ Il n'y avait aucun doublon dans notre corpus.
 Le programme est un notebook dans `notebooks/clean_data.ipynb`.
 
 Le corpus nettoyé est dans `data/clean/clean_datas_chat.csv`.
+
+### Augmenter les données :
+
+Nous n'avons pas le besoin d'augmenter nos données car notre tâche est Question/Answering. Contrairement à une tâche de classification qui a généralement besoin d'augmenter les données.
+
+### Evaluation du corpus : 
+
+Notebook : `notebooks/evaluate_data.ipynb`
+
+#### Métriques adaptées : 
+
+Les métriques d'évaluations des tâches de Q/A sont les suivantes : 
+- __Exact Match__ (calcule la ressemblance stricte entre la réponse prédite et la vraie réponse).
+- __F1-Score__ (valorisaiton des faux positifs et des faux négatifs mot pour mot entre les réponses prédites et les vraies réponses)
+
+Lien vers la page sur la tâche de Q/A : 
+- https://huggingface.co/tasks/question-answering 
+Section : 
+- "Metrics for Question Answering" 
+
+Page expliquant l'importation des métriques du corpus SQuaD, utilisé dans le notebook : 
+- https://github.com/huggingface/evaluate/tree/main/metrics/SQuaD 
+
+#### Métriques proposées : 
+
+Nous pouvons proposer quelques autres métriques d'évaluations pour notre corpus : 
+- ROUGE : Recall-Oriented Understudy for Gisting Evaluation
+- WER : taux d'erreur mot entre réponse de référence et réponse prédite
+
+Ces métriques d'évaluations ont été détaillées dans le notebook. 
+
+Le calcul ROUGE n'a pas été fait dans le code mais vous pourrez trouver celui du WER. Nous avons produit la focntion calcul_wer() qui calcule le WER entre une référence et une prédiction. 
+Comme nous n'avons pas lancé de modèle sur nos données, nous avons tout de même produit le code qui permettrait de comparer les références avec les prédictions.
