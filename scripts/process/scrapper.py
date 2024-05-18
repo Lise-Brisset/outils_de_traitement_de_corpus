@@ -12,32 +12,32 @@ Ce programme peut aussi être importer comme un module car il contient les focnt
 
 """
 
-
-import requests
 import lxml.html
+import requests
 
-url = 'https://fr.wikipedia.org/wiki/Chat'
+url = "https://fr.wikipedia.org/wiki/Chat"
 r = requests.get(url)
-#r.status_code
-#print(r.content)
+# r.status_code
+# print(r.content)
 
 root = lxml.html.fromstring(r.content)
 
 ## exemple pour mieux comprendre la manipulation d'objet xml :
-#toutledoc = root.xpath("/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/p[4]/a[7]")
-#print("=============ELEMENT===============")
-#print(toutledoc[0])
-#print("==========CONTENU TEXTUEL===========")
-#print(toutledoc[0].text_content())
-#print("=============HREF==================")
-#print(toutledoc[0].attrib['href'])
+# toutledoc = root.xpath("/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/p[4]/a[7]")
+# print("=============ELEMENT===============")
+# print(toutledoc[0])
+# print("==========CONTENU TEXTUEL===========")
+# print(toutledoc[0].text_content())
+# print("=============HREF==================")
+# print(toutledoc[0].attrib['href'])
 
 
 introduction = root.xpath("//div[@id='bodyContent']//p|//div[@id='bodyContent']//h2")
 # print(introduction)
 
+
 def get_urls():
-    """ Vient récupèrer tous les liens présents sur la page de départ.
+    """Vient récupèrer tous les liens présents sur la page de départ.
     Parameters
     ----------
     Returns
@@ -46,29 +46,33 @@ def get_urls():
         Un dictionnaire de clé = id et valeur = url.
     """
     dico_urls = {}
-    id=1
+    id = 1
     for p in introduction:
         try:
-            a_tag = p.xpath('.//a')[0]
-            href = a_tag.attrib['href']
+            a_tag = p.xpath(".//a")[0]
+            href = a_tag.attrib["href"]
             # on vérifie que c'est un lien wikipédia
-            if href.startswith('/wiki/'):
+            if href.startswith("/wiki/"):
                 # dans le cas de notre page, tous les href sont des chemins relatifs
-                dico_urls[id] = ('https://fr.wikipedia.org' + href, a_tag.text_content().replace(" ","_"))
+                dico_urls[id] = (
+                    "https://fr.wikipedia.org" + href,
+                    a_tag.text_content().replace(" ", "_"),
+                )
             else:
                 pass
-            id+=1
+            id += 1
         # dans le cas où le p est vide et ne contient donc pas de balise a
         except IndexError:
             pass
 
     return dico_urls
 
+
 urls = get_urls()
 
 
 def get_first_header_text(root):
-    """ Récupère le contenu textuel de l'introduction de la page visitée.
+    """Récupère le contenu textuel de l'introduction de la page visitée.
     Parameters
     ----------
     root : str
@@ -89,11 +93,13 @@ def get_first_header_text(root):
         else:
             return " ".join(text).replace("\n", "")
 
+
 # pour afficher le contenu de l'intro de la première page
-#print(get_first_header_text(root))
+# print(get_first_header_text(root))
+
 
 def save_txt(text_content, file_name):
-    """ Enregistre sous format txt le contenu textuel de la page visitée.
+    """Enregistre sous format txt le contenu textuel de la page visitée.
     Parameters
     ----------
     text_content : str
@@ -110,7 +116,7 @@ def save_txt(text_content, file_name):
 
 
 def save_all_urls_contents(urls_dico):
-    """ Lance et combine l'ensemble des fonctions précédantes.
+    """Lance et combine l'ensemble des fonctions précédantes.
     Parameters
     ----------
     urls_dico : dict
@@ -140,4 +146,3 @@ def save_all_urls_contents(urls_dico):
 
 
 save_all_urls_contents(urls)
-

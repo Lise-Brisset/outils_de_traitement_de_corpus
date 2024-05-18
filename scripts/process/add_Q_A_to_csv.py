@@ -19,7 +19,11 @@ liste_contenu = []
 liste_questions = []
 liste_reponses = []
 
-with open("/home/lise/Documents/TAL_M1S2/outil_de_traitement_de_corpus/outils_de_traitement_de_corpus/data/clean/Q_A_chats.csv", "r", encoding='UTF8') as questions_reponses :
+with open(
+    "/home/lise/Documents/TAL_M1S2/outil_de_traitement_de_corpus/outils_de_traitement_de_corpus/data/clean/Q_A_chats.csv",
+    "r",
+    encoding="UTF8",
+) as questions_reponses:
     reader = csv.reader(questions_reponses, delimiter=",")
     for colonne in reader:
         # les questions se trouve dans la pénultième colonne
@@ -68,18 +72,23 @@ for num_ligne in range(len(liste_ids)):
     ligne = {}
 
     # On remplie le dictionnaire ligne avec les informations récupérées ci-dessus.
-    ligne["id"]=liste_ids[num_ligne]
-    ligne["title"]=liste_titres[num_ligne]
-    ligne["content"]=liste_contenu[num_ligne]
-    ligne["question"]=liste_questions[num_ligne]
-    ligne["answer"]=liste_dico_answers[num_ligne]
+    ligne["id"] = liste_ids[num_ligne]
+    ligne["title"] = liste_titres[num_ligne]
+    ligne["content"] = liste_contenu[num_ligne]
+    ligne["question"] = liste_questions[num_ligne]
+    ligne["answer"] = liste_dico_answers[num_ligne]
     tableau.append(ligne)
 
 # Liste des noms des colonnes du csv final, conforme à SQuAD :
-noms_colonnes = ['id', 'title', 'content', 'question', 'answer']
+noms_colonnes = ["id", "title", "content", "question", "answer"]
 
 # Enregistrement des données sous format tabulaire.
-with (open('/home/lise/Documents/TAL_M1S2/outil_de_traitement_de_corpus/outils_de_traitement_de_corpus/data/clean/datas_chat.csv',  'w', encoding='UTF8', newline='') as out_file):
+with open(
+    "/home/lise/Documents/TAL_M1S2/outil_de_traitement_de_corpus/outils_de_traitement_de_corpus/data/clean/datas_chat.csv",
+    "w",
+    encoding="UTF8",
+    newline="",
+) as out_file:
     writer = csv.DictWriter(out_file, fieldnames=noms_colonnes)
     # on écrit les noms des colonnes du tableaux :
     writer.writeheader()

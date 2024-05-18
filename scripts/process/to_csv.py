@@ -14,9 +14,9 @@ import csv
 import os
 
 # on récupère toute la liste de nos fichiers :
-liste_fichiers = os.listdir('../../data/raw/')
+liste_fichiers = os.listdir("../../data/raw/")
 # pour vérifier le contenu de la liste de fichiers :
-#print(liste_fichiers)
+# print(liste_fichiers)
 
 # liste qui contiendra le contenu de chaque fichier :
 liste_textes = []
@@ -35,7 +35,7 @@ for fichier in liste_fichiers:
     ligne = {}
     # on ouvre chaque document aspiré pour en récupérer ses informations :
     with open(f"../../data/raw/{fichier}", "r") as fichier_txt:
-        #liste_textes.append(fichier_txt.read().replace("\xa0", "")) # on pense à retirer les espacements automatiques à chaque caractère spécial noté \xa0
+        # liste_textes.append(fichier_txt.read().replace("\xa0", "")) # on pense à retirer les espacements automatiques à chaque caractère spécial noté \xa0
         contenu = fichier_txt.read().replace("\xa0", "")
         # on concidère le titre de l'article comme étant la base du nom de chaque fichier (ils correspondent) :
         titre = fichier.replace(".txt", "")
@@ -44,23 +44,22 @@ for fichier in liste_fichiers:
         # même remarque pour les réponses :
         answer = ""
     # on remplie le dictionnaire ligne avec les informations de chaque document txt récupérées ci-dessus:
-    ligne["id"]=id
-    ligne["title"]=titre
-    ligne["content"]=contenu
-    ligne["question"]=""
-    ligne["answer"]=""
+    ligne["id"] = id
+    ligne["title"] = titre
+    ligne["content"] = contenu
+    ligne["question"] = ""
+    ligne["answer"] = ""
     tableau.append(ligne)
 
-#print(tableau)
+# print(tableau)
 
 # liste des noms des colonnes du future csv :
-noms_colonnes = ['id', 'title', 'content', 'question', 'answer']
+noms_colonnes = ["id", "title", "content", "question", "answer"]
 
 # enregistrement des données sous format tabulaire.
-with (open('../../data/clean/sortie.csv',  'w', encoding='UTF8', newline='') as out_file):
+with open("../../data/clean/sortie.csv", "w", encoding="UTF8", newline="") as out_file:
     writer = csv.DictWriter(out_file, fieldnames=noms_colonnes)
     # on écrit les noms des colonnes du tableaux :
     writer.writeheader()
     # on insère tous les dictionnaires ligne dans le tableau grace à la fonction .writerows() :
     writer.writerows(tableau)
-
