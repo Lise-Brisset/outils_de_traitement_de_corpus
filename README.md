@@ -1,5 +1,3 @@
-# Cours Outils de Traitement de Corpus, M1 PluriTal
-
 ---
 annotations_creators:
 - crowdsourced
@@ -100,7 +98,7 @@ train-eval-index:
 
 ### Résumé du dataset
 
-PluriTAL Question Answering Dataset (TALQuAD) est un dataset conçue pour la tâche de TAL de question/answering. 
+PluriTAL Question Answering Dataset (TALQuAD) est un dataset conçu pour la tâche de TAL de question/answering. 
 
 Ce dataset est inspiré du corpus SQuAD (https://huggingface.co/datasets/rajpurkar/squad), qui était le corpus de référence pendant toute la constitution de notre corpus.
 
